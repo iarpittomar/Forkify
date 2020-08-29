@@ -1,9 +1,18 @@
-export default "I am an exported string";
+import axios from "axios";
 
-// const res = await axios(
-//   `https://forkify-api.herokuapp.com/api/search?&q=${this.query}`
-// );
+export default class Search {
+  constructor(query) {
+    this.query = query;
+  }
 
-// const res = await axios(
-//   `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
-// );
+  async getResult() {
+    try {
+      const res = await axios(
+        `https://forkify-api.herokuapp.com/api/search?q=${this.query}`
+      );
+      this.result = res.data.recipes;
+    } catch (error) {
+      alert(error);
+    }
+  }
+}
