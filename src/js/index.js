@@ -15,6 +15,7 @@ import { elements, renderLoader, clearLoader } from "./views/base";
 */
 
 const state = {};
+
 /***********search controller *******************/
 const controlSearch = async () => {
   // 1) Get the query from the view
@@ -42,20 +43,6 @@ const controlSearch = async () => {
     }
   }
 };
-
-elements.searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  controlSearch();
-});
-
-elements.searchResPages.addEventListener("click", (e) => {
-  const btn = e.target.closest(".btn-inline");
-  if (btn) {
-    const goToPage = parseInt(btn.dataset.goto, 10);
-    searchView.clearResult();
-    searchView.renderResults(state.search.result, goToPage);
-  }
-});
 
 /***********recipe controller *******************/
 const controlRecipe = async () => {
@@ -101,9 +88,6 @@ const controlList = () => {
     listView.renderItem(item);
   });
 };
-
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
 
 const controlLikes = () => {
   if (!state.likes) state.likes = new Likes();
@@ -155,6 +139,20 @@ elements.shoppingList.addEventListener("click", (e) => {
   window.addEventListener(event, controlRecipe)
 );
 
+elements.searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  controlSearch();
+});
+
+elements.searchResPages.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-inline");
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+    searchView.clearResult();
+    searchView.renderResults(state.search.result, goToPage);
+  }
+});
+
 //Handling recipe button clicks
 elements.recipe.addEventListener("click", (e) => {
   if (e.target.matches(".btn-decrease, .btn-decrease *")) {
@@ -172,4 +170,13 @@ elements.recipe.addEventListener("click", (e) => {
   } else if (e.target.matches(".recipe__love, .recipe__love *")) {
     controlLikes();
   }
+});
+
+window.addEventListener("load", () => {
+  state.likes = new Likes();
+  state.likes.readStorage();
+
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+  state.likes.likes.forEach((like) => likesView.renderLike(like));
 });
