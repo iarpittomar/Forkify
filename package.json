@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
+    "predeploy": "webpack --mode production",
+    "deploy": "gh-pages -d build",
     "start": "webpack-dev-server --mode development --open"
   },
   "repository": {
@@ -18,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/iarpittomar/Forkify/issues"
   },
-  "homepage": "https://github.com/iarpittomar/Forkify#readme",
+  "homepage": "https://github.com/iarpittomar/Forkify",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -32,6 +34,7 @@
     "axios": "^0.20.0",
     "babel-polyfill": "^6.26.0",
     "fractional": "^1.0.0",
+    "gh-pages": "^3.1.0",
     "jquery": "^3.5.1",
     "uniqid": "^5.2.0"
   }
