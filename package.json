@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/iarpittomar/Forkify/issues"
   },
-  "homepage": "https://github.com/iarpittomar/Forkify",
+  "homepage": "https://iarpittomar.github.io/Forkify",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
